@@ -24,9 +24,13 @@ var orm = {
     });
   },
   // An example of objColVals would be {name: panther, sleepy: true}
-  update: function(id, value) {
-    var queryString = "UPDATE burgers_db SET ? WHERE id = id";
-    connection.query(queryString, id, value, function(err, result) {
+  update: function(condition, cb) {
+    var queryString = "UPDATE burgers_db SET devoured WHERE" ;
+
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }
