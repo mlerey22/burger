@@ -5,33 +5,33 @@ var connection = require("../config/connection.js");
 var orm = {
   all: function() {
     var queryString = "SELECT * FROM burger_db;";
-    connection.query(queryString, function(err, data) {
+    connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }
-      res.render("index", { burgers: data });
+      cb(result);
     });
   },
   create: function(req) {
-    var queryString = "INSERT INTO burgers_db";
+    var queryString = "INSERT INTO burgers_db (name, devoured) VALUES (??)";
     
-    connection.query(queryString, function(err, data) {
+    connection.query(queryString, req, function(err, result) {
       if (err) {
         throw err;
       }
 
-      res.render("index", { burgers: data });
+      cb(result);
     });
   },
   // An example of objColVals would be {name: panther, sleepy: true}
-  update: function(id) {
-    var queryString = "UPDATE burgers_db SET ? WHERE id";
-    connection.query(queryString, function(err, data) {
+  update: function(id, value) {
+    var queryString = "UPDATE burgers_db SET ? WHERE id = id";
+    connection.query(queryString, id, value, function(err, result) {
       if (err) {
         throw err;
       }
 
-      res.render("index", { burgers: data });
+      cb(result);
     });
   }
 };
